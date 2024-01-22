@@ -1,7 +1,6 @@
 {
     "name": "zintel/laravel-service",
     "description": "This package helps you create a service and bind a model to it",
-    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
@@ -11,5 +10,7 @@
     ],
     "require": {
         "php": "^7.1|^8.1"
-    }
+    },
+    "version": "1.0.0",
+    "minimum-stability": "stable"
 }
