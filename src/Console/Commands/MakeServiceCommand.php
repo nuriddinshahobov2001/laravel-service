@@ -31,18 +31,15 @@ class MakeServiceCommand extends Command
         }
 
         $filePath = $currentDirectory . DIRECTORY_SEPARATOR . $filename . 'Service.php';
-        File::put($filePath, $this->generateServiceFileContent($name,$filename, $model));
+        File::put($filePath, $this->generateServiceFileContent($name, $filename, $model));
         $this->info('Service created successfully!');
-//        $this->info('This service already exists!');
     }
 
     protected function generateServiceFileContent($name, $filename, $model)
     {
-        $namespace = dirname($name);
+        $namespace = $this->generateNamespace($name);
         $modelImport = $model ? "use App\Models\\{$model};" : '';
-
-        $content = "<?php\n\nnamespace App\Services\\" . str_replace('/', '\\', $namespace) . ";\n\n{$modelImport}\n\nclass {$filename}Service\n{\n";
-
+        $content = "<?php\n\nnamespace App\Services" . ($namespace ? '\\' : '') . str_replace('/', '\\', $namespace) . ";\n\n{$modelImport}\n\nclass {$filename}Service\n{\n";
         $content .= $this->generateMethod('index');
 
         $content .= $this->generateMethod('store');
@@ -59,5 +56,13 @@ class MakeServiceCommand extends Command
     protected function generateMethod($methodName)
     {
         return "    public function {$methodName}(\$data)\n    {\n        // Your {$methodName} method logic here using \$data\n    }\n\n";
+    }
+
+    protected function generateNamespace($name)
+    {
+        if (str_contains($name, '/')) {
+            return rtrim(str_replace('/', '\\', dirname($name)), '\\');
+        }
+        return '';
     }
 }
