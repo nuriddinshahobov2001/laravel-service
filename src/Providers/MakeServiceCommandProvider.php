@@ -5,7 +5,7 @@ namespace Zintel\LaravelService\Providers;
 use Illuminate\Support\ServiceProvider;
 use Zintel\LaravelService\Console\Commands\MakeServiceCommand;
 
-class PostServiceProvider extends ServiceProvider
+class MakeServiceCommandProvider extends ServiceProvider
 {
     /**
      * Register services.
