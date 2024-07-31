@@ -4,7 +4,7 @@
 ```bash
 composer require zintel/laravel-service
 ```
-### Change config fila
+### Change config file
 ```php
 <?php
 // config/app.php
